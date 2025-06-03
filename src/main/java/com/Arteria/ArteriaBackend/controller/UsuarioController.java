@@ -16,6 +16,9 @@ public class UsuarioController {
 
     private final iUsuarioService usuarioService;
 
+    public UsuarioController(iUsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
 
 
     @GetMapping //Traer todos los usuarios de la BD
