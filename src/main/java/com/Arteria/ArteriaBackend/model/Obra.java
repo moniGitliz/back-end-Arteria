@@ -8,14 +8,19 @@ public class Obra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Aqui se establece como un AUTOINCREMENT
     private Integer id_obra; //PrimaryKey
+
     @Column(nullable = false, length = 50)
     private String nombre_obra;
+
     @Column(nullable = false, length = 150)
     private String descripcion_obra;
+
     @Column(nullable = false)
     private Double precio_obra;
+
     @Column(nullable = false)
     private Integer estado_obra;
+
     @Column(nullable = false, length = 50)
     private String nombre_artista;
 
