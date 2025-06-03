@@ -31,20 +31,20 @@ public class CategoriaService implements ICategoriaService{
         CategoriaRepository.save(categoria);
     }
     @Override
-    public void deletCategoria(Integer id){
+    public void deletCategoria(Integer idCategoria){
 
-        CategoriaRepository.deleteById(id);
+        CategoriaRepository.deleteById(idCategoria);
     }
     @Override
-    public void editarCategoria(Integer id, Categoria categoriaActualizada){
-        Categoria categoriaExistente = CategoriaRepository.findById(id).orElse(null);
+    public void editarCategoria(Integer idCategoria, Categoria categoriaActualizada){
+        Categoria categoriaExistente = CategoriaRepository.findById(idCategoria).orElse(null);
 
         if (categoriaExistente != null){
             categoriaExistente.setNombreCategoria(categoriaActualizada.getNombreCategoria());
 
             CategoriaRepository.save(categoriaExistente);
         }else{
-            throw new RuntimeException("Categoria no encontrada por el id: " + id);
+            throw new RuntimeException("Categoria no encontrada por el id: " + idCategoria);
         }
     }
 }

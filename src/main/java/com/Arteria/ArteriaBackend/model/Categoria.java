@@ -1,5 +1,6 @@
 package com.Arteria.ArteriaBackend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,23 +10,26 @@ import jakarta.persistence.Id;
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_categoria") //  clave para que coincida con tu base de datos
+    private Integer idCategoria;
+
+    @Column(name = "nombre_categoria") // Asegúrate de que este nombre también coincida
     private String nombreCategoria;
 
     public Categoria() {
     }
 
-    public Categoria(int id, String nombreCategoria) {
-        this.id = id;
+    public Categoria(Integer idCategoria, String nombreCategoria) {
+        this.idCategoria = idCategoria;
         this.nombreCategoria = nombreCategoria;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public String getNombreCategoria() {
