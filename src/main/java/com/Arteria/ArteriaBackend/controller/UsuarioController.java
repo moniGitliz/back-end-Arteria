@@ -1,7 +1,8 @@
 package com.Arteria.ArteriaBackend.controller;
 
 import com.Arteria.ArteriaBackend.model.Usuario;
-import com.Arteria.ArteriaBackend.service.UsuarioService;
+import com.Arteria.ArteriaBackend.service.iUsuarioService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,15 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping ("/usuarios")
-
+@RequiredArgsConstructor
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    private final iUsuarioService usuarioService;
 
-@Autowired
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }
+
 
     @GetMapping //Traer todos los usuarios de la BD
     public List<Usuario> listarUsuarios(){
