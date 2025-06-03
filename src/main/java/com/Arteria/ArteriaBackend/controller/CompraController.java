@@ -2,7 +2,6 @@ package com.Arteria.ArteriaBackend.controller;
 
 
 import com.Arteria.ArteriaBackend.model.Compra;
-import com.Arteria.ArteriaBackend.service.CompraService;
 import com.Arteria.ArteriaBackend.service.iCompraService;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
