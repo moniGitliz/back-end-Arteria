@@ -51,8 +51,9 @@ public class ObraService implements iObraService {
             obraExistente.setNombre_obra(obraActualizada.getNombre_obra());
             obraExistente.setDescripcion_obra(obraActualizada.getDescripcion_obra());
             obraExistente.setPrecio_obra(obraActualizada.getPrecio_obra());
-            obraExistente.setEstado_obra(obraActualizada.getEstado_obra()   );
+            obraExistente.setEstado_obra(obraActualizada.getEstado_obra());
             obraExistente.setNombre_artista(obraActualizada.getNombre_artista());
+            obraExistente.setCategoriaId(obraActualizada.getCategoriaId());
 
             //guardo la obra actualizada
             obraRepository.save(obraExistente);
