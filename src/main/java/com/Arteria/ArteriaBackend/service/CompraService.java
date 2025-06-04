@@ -33,7 +33,7 @@ public class CompraService implements iCompraService {
     public Compra crearCompra(Integer usuarioId, List<Integer> obraIds) {
         // 1. Crear la compra vacía
         Compra compra = new Compra();
-        compra.setUsuarioId(usuarioId);
+        compra.setUsuario(usuarioId);
         BigDecimal total = BigDecimal.ZERO;
         List<DetalleCompra> pendientes = new ArrayList<>();
 
