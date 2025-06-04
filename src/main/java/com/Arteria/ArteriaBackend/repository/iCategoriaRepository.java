@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface iCategoriaRepository extends JpaRepository <Categoria, Integer> {
+
+
 }

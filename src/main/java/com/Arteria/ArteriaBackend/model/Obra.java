@@ -23,7 +23,15 @@ public class Obra {
     private Boolean estado_obra;
     @Column(nullable = false, length = 50)
     private String nombre_artista;
-    @Column(name = "FK_id_categoria", nullable = false)
-    private Integer categoriaId;
+
+
+    /*-----------Relaciones---------*/
+    @ManyToOne
+    @JoinColumn(name = "FK_id_categoria") //Va FK???
+    private Categoria categoria;
+    /*------------------------------*/
+
+
+
 }
 

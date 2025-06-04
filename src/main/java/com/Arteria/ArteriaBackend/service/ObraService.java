@@ -1,7 +1,9 @@
 package com.Arteria.ArteriaBackend.service;
 
+import com.Arteria.ArteriaBackend.model.Categoria;
 import com.Arteria.ArteriaBackend.model.Obra;
 import com.Arteria.ArteriaBackend.model.Obra;
+import com.Arteria.ArteriaBackend.repository.iCategoriaRepository;
 import com.Arteria.ArteriaBackend.repository.iObraRepository;
 import com.Arteria.ArteriaBackend.repository.iObraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,12 @@ import java.util.List;
 public class ObraService implements iObraService {
 
     private final iObraRepository obraRepository;
+    private final iCategoriaRepository categoriaRepository;
 
     @Autowired
-    public ObraService(iObraRepository obraRepository) {
+    public ObraService(iObraRepository obraRepository, iCategoriaRepository categoriaRepository) {
         this.obraRepository = obraRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
 
@@ -53,7 +57,13 @@ public class ObraService implements iObraService {
             obraExistente.setPrecio_obra(obraActualizada.getPrecio_obra());
             obraExistente.setEstado_obra(obraActualizada.getEstado_obra());
             obraExistente.setNombre_artista(obraActualizada.getNombre_artista());
-            obraExistente.setCategoriaId(obraActualizada.getCategoriaId());
+           // obraExistente.setCategoria(obraActualizada.getCategoria());
+
+            // En caso de que se necesite editar la categoría
+            Categoria categoriaCompleta = categoriaRepository.findById(obraActualizada.getCategoria().getIdCategoria())
+                    .orElse(null);
+            obraExistente.setCategoria(categoriaCompleta);
+
 
             //guardo la obra actualizada
             obraRepository.save(obraExistente);

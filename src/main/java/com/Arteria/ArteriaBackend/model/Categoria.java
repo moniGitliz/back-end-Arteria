@@ -1,10 +1,13 @@
 package com.Arteria.ArteriaBackend.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Categoria {
@@ -15,6 +18,12 @@ public class Categoria {
 
     @Column(name = "nombre_categoria") // Asegúrate de que este nombre también coincida
     private String nombreCategoria;
+
+    /*-----------Relaciones---------*/
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true) //orphanRemoval = si se elimina una obra de la lista, se borra de la base de datos
+    private List<Obra> obras = new ArrayList<>();
+    /*------------------------------*/
+
 
     public Categoria() {
     }
