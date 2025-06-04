@@ -3,7 +3,7 @@ package com.Arteria.ArteriaBackend.controller;
 import com.Arteria.ArteriaBackend.model.Usuario;
 import com.Arteria.ArteriaBackend.service.iUsuarioService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
