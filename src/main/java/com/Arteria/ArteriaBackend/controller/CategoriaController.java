@@ -30,8 +30,8 @@ public class CategoriaController<id> {
 
     }
     @PostMapping("/crear")
-    public ResponseEntity<String> guardarCategoria(@RequestBody Categoria categoria, Categoria Categoria){
-        categoriaService.guardarCategoria(Categoria);
+    public ResponseEntity<String> guardarCategoria(@RequestBody Categoria categoria){
+        categoriaService.guardarCategoria(categoria);
         return ResponseEntity.ok("Categoria agragada con exito");
 
     }
@@ -45,4 +45,15 @@ public class CategoriaController<id> {
         categoriaService.editarCategoria(id, categoriaActualizada);
         return ResponseEntity.ok("Categoria actualizada con exito");
     }
+
+    @GetMapping("/{id}/obras")
+    public ResponseEntity<?> listarObrasConCategoria(@PathVariable Integer id) {
+        Categoria categoria = categoriaService.obtenerCategoriaPorId(id);
+
+        if (categoria == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(categoria);
+    }
+
 }

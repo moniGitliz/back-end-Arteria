@@ -14,4 +14,5 @@ public interface ICategoriaService {
 
     void editarCategoria(Integer id, Categoria categoriaActualizada);
 
+    Categoria obtenerCategoriaPorId(Integer id);
 }
