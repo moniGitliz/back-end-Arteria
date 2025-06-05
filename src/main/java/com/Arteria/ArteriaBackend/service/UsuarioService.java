@@ -4,19 +4,26 @@ import com.Arteria.ArteriaBackend.model.Usuario;
 import com.Arteria.ArteriaBackend.repository.iUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
 @Service
 public class UsuarioService implements iUsuarioService {
 
+
     private final iUsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
 @Autowired
     public UsuarioService(iUsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
+
+
 
 
     @Override
@@ -29,11 +36,20 @@ public class UsuarioService implements iUsuarioService {
         return usuarioRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public void guardarUsuario(Usuario usuario) {
-    usuarioRepository.save(usuario);
 
+
+    @Override
+    public void registrarUsuario(Usuario usuario) {
+        Usuario userLogin = new Usuario();
+        userLogin.setNombre_usuario(usuario.getNombre_usuario());
+        userLogin.setApellido_usuario(usuario.getApellido_usuario());
+        userLogin.setTelefono_usuario(usuario.getTelefono_usuario());
+        userLogin.setCorreo_usuario(usuario.getCorreo_usuario());
+        userLogin.setContrasenia_usuario(passwordEncoder.encode(usuario.getContrasenia_usuario()));
+        // Encriptar la contraseña
+        usuarioRepository.save(userLogin);
     }
+
 
     @Override
     public void deleteUsuario(Integer id) {
@@ -57,7 +73,7 @@ public class UsuarioService implements iUsuarioService {
             usuarioRepository.save(usuarioExistente);
 
         } else {
-            throw new RuntimeException("Usuario no encontrada con el id: " + id);
+            throw new RuntimeException("Usuario no encontrado con el id: " + id);
         }
 
 
