@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://127.0.0.1:5501") // Esta es mi ruta, se ve en live Server
 @RestController
 @RequestMapping ("/usuarios")
 @RequiredArgsConstructor
@@ -43,6 +44,15 @@ public class UsuarioController {
     public ResponseEntity<String> editarUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioActualizado){
     usuarioService.editarUsuario(id, usuarioActualizado);
     return ResponseEntity.ok("Persona actualizada con éxito!");
+    }
+
+
+
+    //Pruebas de Registro de usuario
+    @PostMapping("/registro")
+    public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
+        usuarioService.guardarUsuario(usuario);
+        return ResponseEntity.ok("Usuario registrado con éxito");
     }
 
 }
