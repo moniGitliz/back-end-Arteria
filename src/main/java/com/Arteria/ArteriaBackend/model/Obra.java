@@ -1,5 +1,7 @@
 package com.Arteria.ArteriaBackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,6 +11,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Obra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Aqui se establece como un AUTOINCREMENT
@@ -31,7 +34,10 @@ public class Obra {
     private Categoria categoria;
     /*------------------------------*/
 
-
-
+    /*----------- Relación con Imagenes -----------*/
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_id_imagenes")//, referencedColumnName = "id_imagen")
+    @JsonManagedReference
+    private Imagenes imagenes;
 }
 

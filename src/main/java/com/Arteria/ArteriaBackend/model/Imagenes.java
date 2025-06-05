@@ -1,6 +1,7 @@
 package com.Arteria.ArteriaBackend.model;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +23,9 @@ public class Imagenes {
     private String miniatura_2_url;
     @Column(nullable = false, length = 100)
     private String miniatura_3_url;
+
+    /*----------- Relación con Obra -----------*/
+    @OneToOne(mappedBy = "imagenes")
+    @JsonBackReference
+    private Obra obra;
 }
