@@ -17,6 +17,7 @@ public class CompraService implements iCompraService {
     private final iCompraRepository compraRepository;
     private final iDetalleCompraRepository detalleRepository;
     private final iObraRepository obraRepository;
+    private  final  iUsuarioRepository usuarioRepository;
 
 
     @Override
@@ -31,48 +32,44 @@ public class CompraService implements iCompraService {
 
     @Override
     public Compra crearCompra(Integer usuarioId, List<Integer> obraIds) {
+
+        Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(()->
+        new RuntimeException("Usuario no existe"));
+
         // 1. Crear la compra vacía
         Compra compra = new Compra();
-        compra.setUsuario(usuarioId);
-        BigDecimal total = BigDecimal.ZERO;
-        List<DetalleCompra> pendientes = new ArrayList<>();
+        compra.setUsuario(usuario);
 
+        // Inicializamos el total en cero antes de sumar
+        compra.setValor_total_compra(BigDecimal.ZERO);
 
-
-        // 2. Procesar cada obra: ¡¡¡¡CONECTAR CUANDO TENGA TODO LO OBRA!!!!
+        // 2. Procesar cada obra
 
         for (Integer obraId : obraIds){
-            Obra obra = obraRepository.findById(obraId).orElseThrow(()->
-                        new RuntimeException("Obra no existe"));
-            // validar disponibilidad
-            if(Boolean.FALSE.equals(obra.getEstado_obra())) {
+            Obra obra = obraRepository.findById(obraId)
+                    .orElseThrow(() -> new RuntimeException("Obra no existe"));
+
+            if (Boolean.FALSE.equals(obra.getEstado_obra())) {
                 throw new RuntimeException("La obra '" + obra.getNombre_obra() + "' ya fue vendida.");
             }
 
-            //Detalle de Compra
-                DetalleCompra detalle = new DetalleCompra();
-                detalle.setObraId(obraId);
-                detalle.setPrecio_unitario_obra(obra.getPrecio_obra());
-                pendientes.add(detalle);
+            // 1. Crear el detalle y setear sus datos
+            DetalleCompra det = new DetalleCompra();
+            det.setObra(obra);
+            det.setPrecio_unitario_obra(obra.getPrecio_obra());
 
-                // actualizar estado de la obra
-                obra.setEstado_obra(false);
-                obraRepository.save(obra);
+            // 2. Vincular y actualizar total
+            det.setCompra(compra);                              // FK lado hijo
+            compra.getDetalles().add(det);                      // lista lado padre
+            compra.setValor_total_compra(
+                    compra.getValor_total_compra().add(det.getPrecio_unitario_obra()));
 
-        total = total.add(obra.getPrecio_obra());
-
+            // 3. Cambiar el estado de la obra
+            obra.setEstado_obra(false);
+            obraRepository.save(obra);
         }
-        // 3. actualizar total y devolver
-        compra.setValor_total_compra(total);
-        compra = compraRepository.save(compra);      // ← único INSERT a compra
-
-        // 3. Asignar id_compra a cada detalle y guardar
-        for (DetalleCompra det : pendientes) {
-            det.setCompraId(compra.getId_compra());
-            detalleRepository.save(det);
-        }
-
-        return compra;
+        // 4. Finalmente guardamos la compra (cascade guardará los detalles)
+        return compraRepository.save(compra);
     }
 
     @Override

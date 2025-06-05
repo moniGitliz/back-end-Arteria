@@ -13,11 +13,12 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Table(name = "compra")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Compra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Aqui se establece como un AUTOINCREMENT
     @Column(name = "id_compra")
-    private Integer id_compra;
+    private Integer idCompra;
     @Column(name = "fecha_compra", nullable = false)
     private LocalDateTime fecha_compra = LocalDateTime.now();
     @Column(name = "valor_total_compra", nullable = false, precision = 10, scale = 2)
@@ -26,7 +27,7 @@ public class Compra {
     /* ──────────── Relaciones ──────────── */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_id_usuario", nullable = false)
-    @JsonBackReference
+    //@JsonBackReference
     private Usuario usuario;
 
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
