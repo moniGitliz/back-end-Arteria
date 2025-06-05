@@ -48,4 +48,14 @@ public class CategoriaService implements ICategoriaService{
             throw new RuntimeException("Categoria no encontrada por el id: " + idCategoria);
         }
     }
+
+    public Categoria obtenerCategoriaPorId(Integer id){
+        Categoria categoria = CategoriaRepository.findById(id).orElse(null);
+
+        if(categoria != null) {
+            categoria.getObras().size();
+        }
+        return categoria;
+    }
+
 }
