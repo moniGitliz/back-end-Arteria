@@ -29,10 +29,11 @@ public class CategoriaController<id> {
         return categoriaService.obtenerID(id);
 
     }
+
     @PostMapping("/crear")
-    public ResponseEntity<String> guardarCategoria(@RequestBody Categoria categoria, Categoria Categoria){
-        categoriaService.guardarCategoria(Categoria);
-        return ResponseEntity.ok("Categoria agragada con exito");
+    public ResponseEntity<String> guardarCategoria(@RequestBody Categoria categoria){
+    categoriaService.guardarCategoria(categoria);
+    return ResponseEntity.ok("Categoria agragada con exito");
 
     }
     @DeleteMapping("/borrar/{id}")
