@@ -15,7 +15,7 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Aplica a todos los endpoints
                         .allowedOrigins("http://127.0.0.1:5501") // MI ruta de live Server
-                        .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos que se permiten
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos  HTTPque se permiten
                         .allowedHeaders("*") // Permitir cualquier header
                         .allowCredentials(true); // Permitir enviar cookies (En caso de que se usen)
             }
