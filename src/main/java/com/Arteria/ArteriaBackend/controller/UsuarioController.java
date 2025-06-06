@@ -54,7 +54,7 @@ public class UsuarioController {
             // Autentica al usuario usando el AuthenticationManager
             // Esto dispara la llamada a UsuarioService.loadUserByUsername y la verificación de contraseña
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getCorreo_usuario(), user.getContrasenia_usuario())
+                    new UsernamePasswordAuthenticationToken(user.getCorreoUsuario(), user.getContrasenia_usuario())
             );
         } catch (Exception e) {
             // Si la autenticación falla (ej. credenciales inválidas), retorna un error 401
@@ -62,7 +62,7 @@ public class UsuarioController {
         }
 
         // Si la autenticación es exitosa, carga los detalles del usuario
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getCorreo_usuario());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getCorreoUsuario());
         // Genera el token JWT para el usuario autenticado
         final String token = jwtUtil.generateToken(userDetails.getUsername()); // userDetails.getUsername() devuelve el correo
 

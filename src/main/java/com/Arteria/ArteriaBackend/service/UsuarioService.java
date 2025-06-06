@@ -44,7 +44,7 @@ public class UsuarioService implements iUsuarioService, UserDetailsService {
         userLogin.setNombre_usuario(usuario.getNombre_usuario());
         userLogin.setApellido_usuario(usuario.getApellido_usuario());
         userLogin.setTelefono_usuario(usuario.getTelefono_usuario());
-        userLogin.setCorreo_usuario(usuario.getCorreo_usuario());
+        userLogin.setCorreoUsuario(usuario.getCorreoUsuario());
         // Encriptar la contraseña
         userLogin.setContrasenia_usuario(passwordEncoder.encode(usuario.getContrasenia_usuario()));
 
@@ -66,7 +66,7 @@ public class UsuarioService implements iUsuarioService, UserDetailsService {
             usuarioExistente.setNombre_usuario(usuarioActualizado.getNombre_usuario());
             usuarioExistente.setApellido_usuario(usuarioActualizado.getApellido_usuario());
             usuarioExistente.setTelefono_usuario(usuarioActualizado.getTelefono_usuario());
-            usuarioExistente.setCorreo_usuario(usuarioActualizado.getCorreo_usuario());
+            usuarioExistente.setCorreoUsuario(usuarioActualizado.getCorreoUsuario());
             // Encriptar la contraseña
             usuarioExistente.setContrasenia_usuario(passwordEncoder.encode(usuarioActualizado.getContrasenia_usuario()));
 
@@ -81,7 +81,7 @@ public class UsuarioService implements iUsuarioService, UserDetailsService {
     // Método de carga de usuario implementado desde UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String correoUsuario) throws UsernameNotFoundException {
-        Usuario usuario= usuarioRepository.findByCorreo_usuario(correoUsuario);
+        Usuario usuario= usuarioRepository.findByCorreoUsuario (correoUsuario);
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
@@ -93,7 +93,7 @@ public class UsuarioService implements iUsuarioService, UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_USER")); // Rol por defecto para otros usuarios
         }
         return new org.springframework.security.core.userdetails.User(
-                usuario.getCorreo_usuario(),
+                usuario.getCorreoUsuario(),
                 usuario.getContrasenia_usuario(),
                 authorities);
     }

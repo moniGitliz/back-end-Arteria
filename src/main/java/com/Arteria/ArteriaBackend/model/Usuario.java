@@ -26,7 +26,7 @@ public class Usuario {
     @Column(nullable = false, length = 20)
     private String telefono_usuario;
     @Column(nullable = false, length = 100)
-    private String correo_usuario;
+    private String correoUsuario;
     @Column(nullable = false, length = 100)
     private String contrasenia_usuario;
 
