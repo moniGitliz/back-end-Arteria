@@ -49,12 +49,13 @@ public class UsuarioController {
 
     // Endpoint para el inicio de sesión (público, accesible para todos)
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuario user) { // Recibe un objeto Usuario con correo y contraseña
+    public ResponseEntity<?> login(@RequestBody Usuario user) { // Recibe un objeto Usuario con correo y contraseña
         try {
             // Autentica al usuario usando el AuthenticationManager
             // Esto dispara la llamada a UsuarioService.loadUserByUsername y la verificación de contraseña
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getCorreoUsuario(), user.getContrasenia_usuario())
+
             );
         } catch (Exception e) {
             // Si la autenticación falla (ej. credenciales inválidas), retorna un error 401
@@ -69,6 +70,18 @@ public class UsuarioController {
         // Retorna el token JWT en la respuesta
         return ResponseEntity.ok(token);
     }
+
+
+//    //Pruebas de login sin JWT
+//    @PostMapping("/login")
+//    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
+//        for (Usuario usuarioGuardado : usuarioService.obtenerTodos()) {
+//            if (usuarioGuardado.getCorreo_usuario().equals(usuario.getCorreo_usuario()) && usuarioGuardado.getContrasenia_usuario().equals(usuario.getContrasenia_usuario())) {
+//                return ResponseEntity.ok("Inicio de sesión exitoso");
+//            }
+//        }
+//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+//    }
 
 
 
