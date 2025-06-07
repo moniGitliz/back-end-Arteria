@@ -48,13 +48,13 @@ public class CategoriaService implements ICategoriaService{
         }
     }
 
-    public Categoria obtenerCategoriaPorId(Integer id){
-        Categoria categoria = CategoriaRepository.findById(id).orElse(null);
-
-        if(categoria != null) {
-            categoria.getObras().size();
-        }
-        return categoria;
-    }
+//    public Categoria obtenerCategoriaPorId(Integer id){
+//        Categoria categoria = CategoriaRepository.findById(id).orElse(null);
+//
+////        if(categoria != null) {
+////            categoria.getObras().size();
+////        }
+//        return categoria;
+//    }
 
 }
