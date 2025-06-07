@@ -1,5 +1,6 @@
 package com.Arteria.ArteriaBackend.controller;
 
+import com.Arteria.ArteriaBackend.DTO.LoginDto;
 import com.Arteria.ArteriaBackend.config.JwtUtil;
 import com.Arteria.ArteriaBackend.model.Usuario;
 import com.Arteria.ArteriaBackend.service.UsuarioService;
@@ -46,30 +47,52 @@ public class UsuarioController {
         return ResponseEntity.ok("Usuario registrado con éxito");
     }
 
-
-    // Endpoint para el inicio de sesión (público, accesible para todos)
+    // Endpoint para el inicio de sesión con DTO (público, accesible para todos)
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuario user) { // Recibe un objeto Usuario con correo y contraseña
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         try {
             // Autentica al usuario usando el AuthenticationManager
-            // Esto dispara la llamada a UsuarioService.loadUserByUsername y la verificación de contraseña
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getCorreoUsuario(), user.getContrasenia_usuario())
-
+                    new UsernamePasswordAuthenticationToken(loginDto.getCorreoUsuario(), loginDto.getContrasenia_usuario()) // <-- CAMBIO AQUÍ
             );
         } catch (Exception e) {
-            // Si la autenticación falla (ej. credenciales inválidas), retorna un error 401
+            // Si la autenticación falla, retorna un error 401
             return ResponseEntity.status(401).body("Credenciales inválidas");
         }
 
         // Si la autenticación es exitosa, carga los detalles del usuario
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getCorreoUsuario());
-        // Genera el token JWT para el usuario autenticado
-        final String token = jwtUtil.generateToken(userDetails.getUsername()); // userDetails.getUsername() devuelve el correo
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getCorreoUsuario()); // <-- CAMBIO AQUÍ
+        // Genera el token JWT
+        final String token = jwtUtil.generateToken(userDetails.getUsername());
 
         // Retorna el token JWT en la respuesta
         return ResponseEntity.ok(token);
     }
+
+
+//    // Endpoint para el inicio de sesión (público, accesible para todos)
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody Usuario user) { // Recibe un objeto Usuario con correo y contraseña
+//        try {
+//            // Autentica al usuario usando el AuthenticationManager
+//            // Esto dispara la llamada a UsuarioService.loadUserByUsername y la verificación de contraseña
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(user.getCorreoUsuario(), user.getContrasenia_usuario())
+//
+//            );
+//        } catch (Exception e) {
+//            // Si la autenticación falla (ej. credenciales inválidas), retorna un error 401
+//            return ResponseEntity.status(401).body("Credenciales inválidas");
+//        }
+//
+//        // Si la autenticación es exitosa, carga los detalles del usuario
+//        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getCorreoUsuario());
+//        // Genera el token JWT para el usuario autenticado
+//        final String token = jwtUtil.generateToken(userDetails.getUsername()); // userDetails.getUsername() devuelve el correo
+//
+//        // Retorna el token JWT en la respuesta
+//        return ResponseEntity.ok(token);
+//    }
 
 
 //    //Pruebas de login sin JWT
