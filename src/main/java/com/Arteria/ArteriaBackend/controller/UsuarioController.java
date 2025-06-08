@@ -48,26 +48,4 @@ public class UsuarioController {
     }
 
 
-
-    //Pruebas de Registro de usuario
-    @PostMapping("/registro")
-    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
-        usuarioService.guardarUsuario(usuario);
-        return ResponseEntity.ok("Usuario registrado con éxito");
-    }
-
-
-    //Pruebas de login
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
-        for (Usuario usuarioGuardado : usuarioService.obtenerTodos()) {
-            if (usuarioGuardado.getCorreo_usuario().equals(usuario.getCorreo_usuario()) && usuarioGuardado.getContrasenia_usuario().equals(usuario.getContrasenia_usuario())) {
-                return ResponseEntity.ok("Inicio de sesión exitoso");
-            }
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
-    }
-
-
-
 }

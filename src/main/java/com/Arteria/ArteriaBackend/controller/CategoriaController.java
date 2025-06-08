@@ -19,41 +19,36 @@ public class CategoriaController<id> {
         this.categoriaService = categoriaService;
 
     }
+
     @GetMapping
-    public List<Categoria> ListCategoria(){
+    public List<Categoria> ListCategoria() {
         return categoriaService.obtenerDatos();
 
     }
+
     @GetMapping("/{id}")
-    public Categoria obtenerPorId(@PathVariable Integer id){
+    public Categoria obtenerPorId(@PathVariable Integer id) {
         return categoriaService.obtenerID(id);
 
     }
+
     @PostMapping("/crear")
-    public ResponseEntity<String> guardarCategoria(@RequestBody Categoria categoria){
+    public ResponseEntity<String> guardarCategoria(@RequestBody Categoria categoria) {
         categoriaService.guardarCategoria(categoria);
         return ResponseEntity.ok("Categoria agragada con exito");
 
     }
+
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity<String> deleteCategria(@PathVariable Integer id){
+    public ResponseEntity<String> deleteCategria(@PathVariable Integer id) {
         return ResponseEntity.ok("Categoria elimineda con exito");
 
     }
+
     @PostMapping("/editar/{id}")
-    public ResponseEntity<String> editarCategoria(PathVariable Integer  , @RequestBody Categoria categoriaActualizada, Integer id){
+    public ResponseEntity<String> editarCategoria(PathVariable Integer, @RequestBody Categoria categoriaActualizada, Integer id) {
         categoriaService.editarCategoria(id, categoriaActualizada);
         return ResponseEntity.ok("Categoria actualizada con exito");
     }
-
-//    @GetMapping("/{id}/obras")
-//    public ResponseEntity<?> listarObrasConCategoria(@PathVariable Integer id) {
-//        Categoria categoria = categoriaService.obtenerCategoriaPorId(id);
-//
-//        if (categoria == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(categoria);
-//    }
 
 }
