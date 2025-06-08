@@ -52,13 +52,13 @@ public class ObraController {
         return  obraService.findObrasByCategoriaId(id);
     }
 
-
+/*
     // --- Método para Barra de búsqueda --//
     @GetMapping("/buscar")
     public List<Obra> buscarObras(@RequestParam String termino) {
         return obraService.buscarObras(termino);
     }
-
+*/
 
 
 }

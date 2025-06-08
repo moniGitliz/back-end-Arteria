@@ -76,10 +76,12 @@ public class ObraService implements iObraService {
     public List<Obra> findObrasByCategoriaId(Integer idCategoria) {
         return obraRepository.findObrasByCategoriaId(idCategoria);
     }
-
+/*
     // --- Método para Barra de búsqueda --//
     @Override
     public List<Obra> buscarObras(String termino) {
         return obraRepository.findByNombreObraContainingIgnoreCaseOrNombreArtistaContainingIgnoreCase(termino, termino);
     }
+
+ */
 }

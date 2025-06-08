@@ -22,9 +22,9 @@ public class Categoria {
     private String nombreCategoria;
 
     /*-----------Relaciones---------*/
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true) //orphanRemoval = si se elimina una obra de la lista, se borra de la base de datos
-    @JsonIgnore //Properties("categoria") // Para evitar el bucle infinito
-    private List<Obra> obras = new ArrayList<>();
+//    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true) //orphanRemoval = si se elimina una obra de la lista, se borra de la base de datos
+//    @JsonIgnore //Properties("categoria") // Para evitar el bucle infinito
+//    private List<Obra> obras = new ArrayList<>();
     /*------------------------------*/
 
 
