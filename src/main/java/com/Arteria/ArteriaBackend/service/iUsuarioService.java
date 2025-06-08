@@ -7,7 +7,7 @@ import java.util.List;
 public interface iUsuarioService {
     List<Usuario> obtenerTodos();
     Usuario obtenerPorId(Integer id);
-    void guardarUsuario(Usuario usuario);
+    void registrarUsuario(Usuario usuario);
     void deleteUsuario(Integer id);
     void editarUsuario (Integer id, Usuario usuarioActualizado);
 }

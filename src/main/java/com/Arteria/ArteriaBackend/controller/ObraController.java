@@ -51,4 +51,14 @@ public class ObraController {
     public List<Obra> listarObrasById(@PathVariable Integer id){
         return  obraService.findObrasByCategoriaId(id);
     }
+
+
+    // --- Método para Barra de búsqueda --//
+    @GetMapping("/buscar")
+    public List<Obra> buscarObras(@RequestParam String termino) {
+        return obraService.buscarObras(termino);
+    }
+
+
+
 }
