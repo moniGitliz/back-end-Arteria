@@ -2,9 +2,7 @@ package com.Arteria.ArteriaBackend.service;
 
 import com.Arteria.ArteriaBackend.model.Categoria;
 import com.Arteria.ArteriaBackend.model.Obra;
-import com.Arteria.ArteriaBackend.model.Obra;
 import com.Arteria.ArteriaBackend.repository.iCategoriaRepository;
-import com.Arteria.ArteriaBackend.repository.iObraRepository;
 import com.Arteria.ArteriaBackend.repository.iObraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,5 +70,16 @@ public class ObraService implements iObraService {
             throw new RuntimeException("Obra no encontrada con el id: " + id);
         }
         
+    }
+
+    @Override
+    public List<Obra> findObrasByCategoriaId(Integer idCategoria) {
+        return obraRepository.findObrasByCategoriaId(idCategoria);
+    }
+
+    // --- Método para Barra de búsqueda --//
+    @Override
+    public List<Obra> buscarObras(String termino) {
+        return obraRepository.findByNombreObraContainingIgnoreCaseOrNombreArtistaContainingIgnoreCase(termino, termino);
     }
 }

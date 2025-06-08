@@ -1,5 +1,6 @@
 package com.Arteria.ArteriaBackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class Categoria {
 
     /*-----------Relaciones---------*/
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true) //orphanRemoval = si se elimina una obra de la lista, se borra de la base de datos
-    @JsonIgnoreProperties("categoria") // Para evitar el bucle infinito
+    @JsonIgnore //Properties("categoria") // Para evitar el bucle infinito
     private List<Obra> obras = new ArrayList<>();
     /*------------------------------*/
 
@@ -35,13 +36,13 @@ public class Categoria {
         this.nombreCategoria = nombreCategoria;
     }
 
-    public List<Obra> getObras() {
-        return obras;
-    }
-
-    public void setObras(List<Obra> obras) {
-        this.obras = obras;
-    }
+//    public List<Obra> getObras() {
+//        return obras;
+//    }
+//
+//    public void setObras(List<Obra> obras) {
+//        this.obras = obras;
+//    }
 
     public Integer getIdCategoria() {
         return idCategoria;

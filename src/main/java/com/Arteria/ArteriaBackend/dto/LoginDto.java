@@ -1,4 +1,4 @@
-package com.Arteria.ArteriaBackend.DTO;
+package com.Arteria.ArteriaBackend.dto;
 
 import lombok.*;
 

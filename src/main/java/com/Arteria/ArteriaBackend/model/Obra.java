@@ -27,7 +27,6 @@ public class Obra {
     @Column(nullable = false, length = 50)
     private String nombre_artista;
 
-
     /*-----------Relaciones---------*/
     @ManyToOne
     @JoinColumn(name = "FK_id_categoria") //Va FK???
@@ -39,5 +38,24 @@ public class Obra {
     @JoinColumn(name = "FK_id_imagenes")//, referencedColumnName = "id_imagen")
     @JsonManagedReference
     private Imagenes imagenes;
+
+
+    //Moni
+//
+//    /*-----------Relaciones---------*/
+//    @ManyToOne
+//    @JoinColumn(name = "FK_id_categoria") //Va FK???
+//    private Categoria categoria;
+//
+//
+//
+//    /*----------- Relación con Imagenes -----------*/
+//    // Obra es el lado "inverso" de la relación, la cual es "mapeada por" el campo "obra" en la clase Imagenes.
+//    @OneToOne(mappedBy = "obra", cascade = CascadeType.ALL)
+//    private Imagenes imagenes;
+
+
+
+
 }
 

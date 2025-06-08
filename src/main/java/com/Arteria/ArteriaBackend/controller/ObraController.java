@@ -46,4 +46,19 @@ public class ObraController {
         obraService.editarobra(id, obraActualizado);
         return ResponseEntity.ok("Obra actualizada con éxito!");
     }
+
+    @GetMapping ("/byId/{id}") //Traer todas los obras por id
+    public List<Obra> listarObrasById(@PathVariable Integer id){
+        return  obraService.findObrasByCategoriaId(id);
+    }
+
+
+    // --- Método para Barra de búsqueda --//
+    @GetMapping("/buscar")
+    public List<Obra> buscarObras(@RequestParam String termino) {
+        return obraService.buscarObras(termino);
+    }
+
+
+
 }

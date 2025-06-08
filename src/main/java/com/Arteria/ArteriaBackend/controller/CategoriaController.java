@@ -46,14 +46,4 @@ public class CategoriaController<id> {
         return ResponseEntity.ok("Categoria actualizada con exito");
     }
 
-    @GetMapping("/{id}/obras")
-    public ResponseEntity<?> listarObrasConCategoria(@PathVariable Integer id) {
-        Categoria categoria = categoriaService.obtenerCategoriaPorId(id);
-
-        if (categoria == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(categoria);
-    }
-
 }
