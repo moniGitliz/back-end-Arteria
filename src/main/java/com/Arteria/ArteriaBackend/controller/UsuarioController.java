@@ -4,6 +4,7 @@ import com.Arteria.ArteriaBackend.model.Usuario;
 import com.Arteria.ArteriaBackend.service.iUsuarioService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,9 +51,23 @@ public class UsuarioController {
 
     //Pruebas de Registro de usuario
     @PostMapping("/registro")
-    public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
         usuarioService.guardarUsuario(usuario);
         return ResponseEntity.ok("Usuario registrado con éxito");
     }
+
+
+    //Pruebas de login
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
+        for (Usuario usuarioGuardado : usuarioService.obtenerTodos()) {
+            if (usuarioGuardado.getCorreo_usuario().equals(usuario.getCorreo_usuario()) && usuarioGuardado.getContrasenia_usuario().equals(usuario.getContrasenia_usuario())) {
+                return ResponseEntity.ok("Inicio de sesión exitoso");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+    }
+
+
 
 }

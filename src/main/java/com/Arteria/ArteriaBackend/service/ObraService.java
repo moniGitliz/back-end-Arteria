@@ -73,4 +73,9 @@ public class ObraService implements iObraService {
         }
         
     }
+
+    @Override
+    public List<Obra> findObrasByCategoriaId(Integer idCategoria) {
+        return obraRepository.findObrasByCategoriaId(idCategoria);
+    }
 }
