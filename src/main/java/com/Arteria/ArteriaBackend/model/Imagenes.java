@@ -1,6 +1,7 @@
 package com.Arteria.ArteriaBackend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,4 +30,17 @@ public class Imagenes {
     @OneToOne(mappedBy = "imagenes")
     @JsonBackReference
     private Obra obra;
+
+    //Moni
+//    /*----------- Relación con Obra -----------*/
+//    // Imagenes es el lado "dueño" de la relación.
+//    @OneToOne
+//    @JoinColumn(name = "FK_id_obra") // Especificamos la columna de clave foránea en esta tabla.
+//    @JsonIgnore // Ignoramos la serialización de la obra desde la imagen para evitar bucles.
+//    private Obra obra;
+
+
+
+
+
 }
